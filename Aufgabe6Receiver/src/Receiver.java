@@ -9,17 +9,15 @@ public class Receiver {
 
 	private static int enter = 0;
 	private static int left = 0;
-	private static int right = 0;
-	
-	
-	private static boolean terminate = false;
-	
+	private static int right = 0;	
 	
 	public static void main(String [ ] args){
 		
 		NXTConnection connectionBT = Bluetooth.waitForConnection();
 		DataInputStream disBT =
 			connectionBT.openDataInputStream();
+		
+		boolean terminate = false;
 		
 		while(!terminate){
 			try {
@@ -45,6 +43,8 @@ public class Receiver {
 		} catch (IOException e) {
 		
 		}
+		
+		connectionBT.close();
 		
 	}
 

@@ -30,6 +30,9 @@ public class Sender {
 			System.exit(1);
 		}
 		
+		LCD.clear();
+		LCD.drawString("con established", 0,0);
+		
 		DataOutputStream dos = con.openDataOutputStream();
 		
 		int left =0;
@@ -40,18 +43,22 @@ public class Sender {
 		while(!escapePressed){
 			int id = Button.waitForPress();
 			if((id&1)!=0){
+				LCD.clear();
 				LCD.drawString("enter pressed",0,0);
 				enter++;
 			}
 			if((id&2)!=0){
+				LCD.clear();
 				LCD.drawString("left pressed",0,1);
 				left++;
 			}
 			if((id&4)!=0){
+				LCD.clear();
 				LCD.drawString("right pressed",0,2);
 				right++;
 			}
 			if((id&8)!=0){
+				LCD.clear();
 				LCD.drawString("esc pressed",0,3);
 				escapePressed = true;
 			}
@@ -76,6 +83,14 @@ public class Sender {
 					LCD.drawString("sending term",0,1);
 					System.exit(1);
 				}
+			}
+			
+			try {
+				dos.flush();
+			} catch (IOException e) {
+				LCD.drawString("error while", 0, 0);
+				LCD.drawString("flushing",0,1);
+				System.exit(1);
 			}
 		}
 		
