@@ -1,2 +1,0 @@
-INDEX VERSION 1.126+C:\Users\Butterfly\Documents\Uni\2. Semester\Lego\LegoMindstormIntroduction\.metadata\.plugins\org.eclipse.jdt.core
-3572774635.index
