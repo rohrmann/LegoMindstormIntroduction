@@ -1,4 +1,5 @@
-import lejos.nxt.Motor;
+import lejos.nxt.LCD;
+import lejos.robotics.navigation.Pilot;
 import lejos.robotics.subsumption.Behavior;
 
 /**
@@ -11,29 +12,44 @@ import lejos.robotics.subsumption.Behavior;
 public class SnakeLines implements Behavior {
 	
 	private boolean active = false;
-	private int angleToRotate = 30;
+	private int arcAngle;
+	private int turnRate;
+	private Pilot pilot;
+	
+	public SnakeLines(int turnRate,int arcAngle,Pilot pilot){
+		this.pilot = pilot;
+		this.arcAngle = arcAngle;
+		this.turnRate= turnRate;
+	}
 
 	@Override
 	public void action() {
+		
+		LCD.drawString("SnakeLines",0,5);
+		
 		active = true;
 		int turn = 0;
 		
 		while(active){
+			LCD.drawString(active?"true":"false",0,2);
 			if(turn % 2 == 0){
-				Motor.A.rotate(angleToRotate);
+				pilot.steer(turnRate,arcAngle);
 			}
 			else{
-				Motor.B.rotate(angleToRotate);
+				pilot.steer(-1*turnRate,arcAngle);
 			}
-			
 			turn++;
 		}
+		
+		LCD.drawString(active?"true":"false",0,2);
 
 	}
 
 	@Override
 	public void suppress() {
+		LCD.drawString("Suppress SnakeLines",0,5);
 		active = false;
+		pilot.stop();
 	}
 
 	@Override
