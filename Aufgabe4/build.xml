@@ -1,6 +1,6 @@
-<project name="Aufgabe2" default="uploadandrun">
+<project name="Aufgabe4" default="uploadandrun">
     <description>
-    	Aufgabe2 build file
+    	Aufgabe4 build file
     </description>
 
   <!-- set properties for this build -->
@@ -8,7 +8,7 @@
   <property file="build.properties"/>
   <property name="src" location="src"/>
   <property name="build" location="build"/>
-  <property name="main.class" value="Aufgabe2"/>
+  <property name="main.class" value="Behaviors"/>
   <property name="binary" value="${build}/${main.class}.nxj" />
 	
   <!-- deletes generated files -->
@@ -55,7 +55,6 @@
       <jvmarg value="-Djava.library.path=${nxj.library.path}"/>
       <jvmarg value="-Dnxj.home=${nxj.home}"/>
       <arg value="${binary}"/>
-      <arg value="-u"/>
       <classpath>
         <pathelement location="${nxj.jtools.jar}"/>
         <pathelement location="${nxj.pctools.jar}"/>
@@ -74,7 +73,6 @@
       <jvmarg value="-Djava.library.path=${nxj.library.path}"/>
       <jvmarg value="-Dnxj.home=${nxj.home}"/>
       <arg value="${binary}"/>
-      <arg value="-u"/>
       <arg value="-r"/>
       <classpath>
         <pathelement location="${nxj.jtools.jar}"/>
