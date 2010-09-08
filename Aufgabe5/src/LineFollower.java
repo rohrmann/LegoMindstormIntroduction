@@ -34,13 +34,14 @@ public class LineFollower {
 		
 		Button.waitForPress();
 		
-		Pilot pilot = new TachoPilot(5.6f,105.f,Motor.A,Motor.B,false);
+		Pilot pilot = new TachoPilot(5.6f,11.5f,Motor.A,Motor.B,false);
 		
 		pilot.setMoveSpeed(10);
 		FollowLine line = new FollowLine(pilot);
 		LineIntersection intersection = new LineIntersection(color, tolerance, pilot, SensorPort.S2, SensorPort.S1);
+		CrossingFound crossing = new CrossingFound(color,tolerance,pilot,SensorPort.S2,SensorPort.S1);
 		
-		Behavior[] behaviors = {line,intersection};
+		Behavior[] behaviors = {line,intersection,crossing};
 		Arbitrator arbitrator = new Arbitrator(behaviors);
 		arbitrator.start();
 	}

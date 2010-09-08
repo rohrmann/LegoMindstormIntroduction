@@ -1,4 +1,5 @@
 import lejos.nxt.LCD;
+import lejos.nxt.LightSensor;
 
 /**
  * Class which provides convenient functions
@@ -19,6 +20,10 @@ public class Helper {
 		}
 		
 		return result;
+	}
+	
+	public static boolean lineIntersection(LightSensor sensor,int color, int tolerance){
+		return Math.abs(sensor.getLightValue()-color)>tolerance;
 	}
 
 }

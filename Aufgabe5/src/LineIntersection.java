@@ -13,7 +13,6 @@ public class LineIntersection implements Behavior {
 	private LightSensor left;
 	private LightSensor right;
 	private boolean active;
-	private int turns;
 		
 	public LineIntersection(int color, int tolerance,Pilot pilot,SensorPort leftLightPort, SensorPort rightLightPort){
 		this.color=color;
@@ -21,45 +20,25 @@ public class LineIntersection implements Behavior {
 		this.pilot = pilot;
 		this.left = new LightSensor(leftLightPort);
 		this.right=new LightSensor(rightLightPort);
-		turns = 0;
 	}
 
 	@Override
 	public void action() {
 		active = true;
 
-		while(active && (lineIntersection(left)||lineIntersection(right))){
-			if(lineIntersection(left)&&lineIntersection(right)){
-				Helper.drawString("crossing", 0, 0);
-				if(turns %2 ==0 ){
-					Motor.B.forward();
-					Motor.A.stop();
-
-					while(lineIntersection(right)){
-						;
-					}
-				}
-				else{
-					Motor.A.forward();
-					Motor.B.stop();
-					while(lineIntersection(left)){
-						;
-					}
-				}
-				
-				turns++;
-			}
-			if(lineIntersection(left)){
-				Helper.drawString("I left",0,0);
-				Motor.A.stop();
-				Motor.B.forward();
-			}
-			else{
-				Helper.drawString("I right",0,0);
-				Motor.A.forward();
-				Motor.B.stop();
-			}
+		if(Helper.lineIntersection(left,color,tolerance)){
+			Helper.drawString("I left",0,0);
+			Motor.A.stop();
+			Motor.B.forward();
 		}
+		else{
+			Helper.drawString("I right",0,0);
+			Motor.A.forward();
+			Motor.B.stop();
+		}
+
+		while(active && (Helper.lineIntersection(left,color,tolerance)^Helper.lineIntersection(right,color,tolerance)))
+			Thread.yield();
 		
 		pilot.stop();
 	}
@@ -71,13 +50,11 @@ public class LineIntersection implements Behavior {
 
 	}
 	
-	public boolean lineIntersection(LightSensor sensor){
-		return Math.abs(sensor.getLightValue()-color)>tolerance;
-	}
+	
 
 	@Override
 	public boolean takeControl() {
-		return lineIntersection(left)^lineIntersection(right);
+		return Helper.lineIntersection(left,color,tolerance)^Helper.lineIntersection(right,color,tolerance);
 	}
 
 }
