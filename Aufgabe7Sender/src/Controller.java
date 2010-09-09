@@ -38,25 +38,28 @@ public class Controller {
 				@Override
 				public void buttonReleased(Button arg0) {
 					nxt.A.stop();
+
 				}
 
 				@Override
 				public void buttonPressed(Button arg0) {
 					nxt.A.forward();
+
 				}
 			});
 
 			Button.RIGHT.addButtonListener(new ButtonListener() {
 
 				@Override
-				public void buttonReleased(Button arg0) {
-					nxt.B.stop();
-				}
-
-				@Override
 				public void buttonPressed(Button arg0) {
 					nxt.B.forward();
 				}
+
+
+				@Override
+				public void buttonReleased(Button arg0) {
+					nxt.B.stop();
+								}
 			});
 
 			Button.ENTER.addButtonListener(new ButtonListener() {

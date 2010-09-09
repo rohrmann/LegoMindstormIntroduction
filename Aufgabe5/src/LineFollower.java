@@ -10,7 +10,7 @@ import lejos.robotics.subsumption.Behavior;
 
 /***
  * Program which enables a robot to follow a line which can have crossings. To do that it needs
- * to lightsensors which enframe the line.
+ * two lightsensors which enframe the line.
  * @author rohrmann
  *
  */
@@ -25,6 +25,9 @@ public class LineFollower {
 		Helper.drawString("Press Button",0,0);
 		Button.waitForPress();
 		
+		/**
+		 * read the current light value of the ground. This value will be used as the default value
+		 */
 		int color = left.getLightValue();
 		int tolerance = 5;
 		
