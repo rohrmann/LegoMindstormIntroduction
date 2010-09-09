@@ -1,7 +1,11 @@
 import lejos.robotics.navigation.Pilot;
 import lejos.robotics.subsumption.Behavior;
 
-
+/**
+ * This class implements the default behavior of the robot: It let the robot drive forward.
+ * @author rohrmann
+ *
+ */
 public class FollowLine implements Behavior {
 	
 	private Pilot pilot;
