@@ -27,7 +27,7 @@ public class Receiver {
 
 		// wait for the connection to be established
 		NXTConnection con = Bluetooth.waitForConnection();
-		
+
 		// open a data input stream to be able to read the data
 		DataInputStream dis = con.openDataInputStream();
 
@@ -54,7 +54,10 @@ public class Receiver {
 					terminate = true;
 				}
 			} catch (IOException e) {
-
+				LCD.clear();
+				LCD.drawString("Error while reading", 0, 1);
+				LCD.drawString("information.", 0, 2);
+				terminate = true;
 			}
 			// show the numbers on the display
 			LCD.drawString("Enter:" + enter, 0, 1);
@@ -68,10 +71,11 @@ public class Receiver {
 		try {
 			dis.close();
 		} catch (IOException e) {
-
+			LCD.clear();
+			LCD.drawString("Error while closing", 0, 1);
+			LCD.drawString("stream.", 0, 2);
 		}
 		con.close();
-
 	}
 
 }

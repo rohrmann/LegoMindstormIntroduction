@@ -97,8 +97,8 @@ public class Sender {
 					dos.writeInt(left);
 					dos.writeInt(right);
 				} catch (IOException e) {
-					LCD.drawString("error while", 0, 0);
-					LCD.drawString("sending data", 0, 1);
+					LCD.drawString("Error while", 0, 0);
+					LCD.drawString("sending data.", 0, 1);
 					System.exit(1);
 				}
 			}
@@ -108,8 +108,8 @@ public class Sender {
 				try {
 					dos.writeInt(0);
 				} catch (IOException e) {
-					LCD.drawString("error while", 0, 0);
-					LCD.drawString("sending term", 0, 1);
+					LCD.drawString("Error while", 0, 0);
+					LCD.drawString("sending term.", 0, 1);
 					System.exit(1);
 				}
 			}
@@ -117,8 +117,8 @@ public class Sender {
 			try {
 				dos.flush();
 			} catch (IOException e) {
-				LCD.drawString("error while", 0, 0);
-				LCD.drawString("flushing", 0, 1);
+				LCD.drawString("Error while", 0, 0);
+				LCD.drawString("flushing.", 0, 1);
 				System.exit(1);
 			}
 		}
@@ -126,8 +126,8 @@ public class Sender {
 		try {
 			dos.close();
 		} catch (IOException e) {
-			LCD.drawString("error while closing", 0, 0);
-			LCD.drawString("dos", 0, 1);
+			LCD.drawString("Error while closing", 0, 0);
+			LCD.drawString("dos.", 0, 1);
 			System.exit(1);
 		}
 
