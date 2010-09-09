@@ -6,11 +6,11 @@ import java.util.Random;
 /**
  * EchoNavigator is a obstacle avoiding  robot that attempts reach its destination.
  *  Uses SimpleNavigator
- * Hareware rquirements:   an ultrasonic sensor mounted on a vertical axle
+ * Hardware requirements:   an ultrasonic sensor mounted on a vertical axle
  * driven by the  third motor.
  * Since it relies on dead reckoning to keep track of its
  * location, the accuracy of navigation degrades with each obstacle.  Does not
- * mep the obstacles, but uses a randomized avoiding strategy.
+ * map the obstacles, but uses a randomized avoiding strategy.
  * @author Roger
  */
 public class EchoNavigator
@@ -22,6 +22,9 @@ public class EchoNavigator
 	LightSensor light;
 	private Motor scanner;
 	int _limit =35; //cm
+	/**
+	 * if the light sensor detects an underground with a value below or equal to obstacle, it will be regarded as an obstacle
+	 */
 	final int obstacle = 35;
 	
 	public EchoNavigator(SimpleNavigator navigator, SensorPort echo,SensorPort lightPort, Motor scanMotor)
@@ -96,6 +99,11 @@ public class EchoNavigator
 		return  readDistance ();  // watch for hit while moving forward
 	}
 	
+	/**
+	 * If an obstacle on the ground is detected, the robot travels some distance back, then turns randomly in direction one direction and finally travels some distance in this direction. After that
+	 * the robot tries to reach its original destination.
+	 * @return
+	 */
 	private int avoidGround(){
 		
 		int direction = rand.nextBoolean()?1:-1;
@@ -106,9 +114,11 @@ public class EchoNavigator
 		return readDistance();
 	}
 	/**
-	 * Monitors the ultrasonic sensor while the robot is moving.
-	 * Returns if an obstacle is detected or if the robot stops
-	 * @return false if obstacle was detected
+	 * Monitors the ultrasonic and the light sensor while the robot is moving.
+	 * Returns which kind of obstacle is detected or if the robot stops
+	 * @return 0 if the robot stops
+	 * 1 if the ultrasonic sensor has detected an obstacle
+	 * 2 if the light sensor has detected an obstacle on the ground
 	 */
 	public int readDistance()
 	{
