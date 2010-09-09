@@ -21,13 +21,13 @@ public class Controller {
 				
 				@Override
 				public void buttonReleased(Button arg0) {
-					nxt.A.forward();
+					nxt.A.stop();
 					
 				}
 				
 				@Override
 				public void buttonPressed(Button arg0) {
-					nxt.A.stop();
+					nxt.A.forward();
 					
 				}
 			}
@@ -37,12 +37,12 @@ public class Controller {
 
 				@Override
 				public void buttonPressed(Button arg0) {
-					nxt.B.stop();
+					nxt.B.forward();
 				}
 
 				@Override
 				public void buttonReleased(Button arg0) {
-					nxt.B.forward();
+					nxt.B.stop();
 					
 				}
 				

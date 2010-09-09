@@ -4,19 +4,25 @@ import lejos.nxt.UltrasonicSensor;
 import lejos.robotics.navigation.Pilot;
 import lejos.robotics.subsumption.Behavior;
 
-
+/**
+ * This class implements the driving straight forward behavior if someone holds
+ * his hand above the robot.
+ * 
+ * @author rohrmann
+ * 
+ */
 public class GoingStraight implements Behavior {
 
 	private final int threshold;
 	private UltrasonicSensor sonic;
 	private Pilot pilot;
-	
-	public GoingStraight(int threshold,SensorPort ultrasonicPort,Pilot pilot){
+
+	public GoingStraight(int threshold, SensorPort ultrasonicPort, Pilot pilot) {
 		this.threshold = threshold;
 		sonic = new UltrasonicSensor(ultrasonicPort);
 		this.pilot = pilot;
 	}
-	
+
 	@Override
 	public void action() {
 		LCD.drawString("GoingStraight", 0, 5);
@@ -25,7 +31,7 @@ public class GoingStraight implements Behavior {
 
 	@Override
 	public void suppress() {
-		LCD.drawString("suppress GoingStraight",0,5);
+		LCD.drawString("suppress GoingStraight", 0, 5);
 		pilot.stop();
 
 	}
